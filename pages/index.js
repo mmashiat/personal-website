@@ -157,8 +157,7 @@ const Home = () => {
               "Simplicity is the ultimate sophistication." — Leonardo da Vinci
             </p>
           </section>
-
-          <section className="space-y-2 font-mono text-sm">
+ <section className="space-y-2 font-mono text-sm">
   <p className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}>
     directory
   </p>
@@ -177,7 +176,7 @@ const Home = () => {
       </a>
     ))}
   </div>
-          </section>
+ </section>
 
           <section className="space-y-4 font-mono text-sm">
             <p className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}>
@@ -221,7 +220,7 @@ const Home = () => {
             </div>
           </section>
 
-          <section className="space-y-2 font-mono text-sm pt-4">
+ <section className="space-y-2 font-mono text-sm pt-4">
   <p className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}>
     connect
   </p>
