@@ -159,24 +159,24 @@ const Home = () => {
           </section>
 
           <section className="space-y-2 font-mono text-sm">
-            <p className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}>
-              directory
-            </p>
-            <div className="space-y-2">
-              {['/projects', '/work', '/food', '/photos'].map((path) => (
-                <a 
-                  key={path}
-                  href={path}
-                  className={`block transition-colors ${
-                    theme === 'dark'
-                      ? 'text-gray-400 hover:text-white'
-                      : 'text-gray-600 hover:text-black'
-                  }`}
-                >
-                  └── {path}
-                </a>
-              ))}
-            </div>
+  <p className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}>
+    directory
+  </p>
+  <div className="flex flex-col space-y-2">
+    {['/projects', '/work', '/food', '/photos'].map((path) => (
+      <a 
+        key={path}
+        href={path}
+        className={`block transition-colors ${
+          theme === 'dark'
+            ? 'text-gray-400 hover:text-white'
+            : 'text-gray-600 hover:text-black'
+        }`}
+      >
+        └── {path}
+      </a>
+    ))}
+  </div>
           </section>
 
           <section className="space-y-4 font-mono text-sm">
@@ -222,25 +222,25 @@ const Home = () => {
           </section>
 
           <section className="space-y-2 font-mono text-sm pt-4">
-            <p className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}>
-              connect
-            </p>
-            <div className="space-y-2">
-              {['linkedin', 'twitter'].map((platform) => (
-                <a 
-                  key={platform}
-                  href={`https://${platform}.com/yourusername`}
-                  className={`block transition-colors ${
-                    theme === 'dark'
-                      ? 'text-gray-400 hover:text-white'
-                      : 'text-gray-600 hover:text-black'
-                  }`}
-                >
-                  └── @{platform} ─→
-                </a>
-              ))}
-            </div>
-          </section>
+  <p className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}>
+    connect
+  </p>
+  <div className="flex flex-col space-y-2">
+    {['linkedin', 'twitter'].map((platform) => (
+      <a 
+        key={platform}
+        href={`https://${platform}.com/yourusername`}
+        className={`block transition-colors ${
+          theme === 'dark'
+            ? 'text-gray-400 hover:text-white'
+            : 'text-gray-600 hover:text-black'
+        }`}
+      >
+        └── @{platform} ─→
+      </a>
+    ))}
+  </div>
+</section>
         </main>
       </div>
     </div>
