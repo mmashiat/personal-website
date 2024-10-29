@@ -255,19 +255,26 @@ const Home = () => {
               connect
             </p>
             <div className="flex flex-col space-y-2">
-              {['linkedin', 'twitter'].map((platform) => (
-                <a 
-                  key={platform}
-                  href={`https://${platform}.com/yourusername`}
-                  className={`block transition-colors ${
-                    theme === 'dark'
-                      ? 'text-gray-400 hover:text-white'
-                      : 'text-gray-600 hover:text-black'
-                  }`}
-                >
-                  └── @{platform} ─→
-                </a>
-              ))}
+              <a 
+                href="https://www.linkedin.com/in/mashiatm/"
+                className={`block transition-colors ${
+                  theme === 'dark'
+                    ? 'text-gray-400 hover:text-white'
+                    : 'text-gray-600 hover:text-black'
+                }`}
+              >
+                └── @linkedin ─→
+              </a>
+              <a 
+                href="https://twitter.com/marvelgirl_eth"
+                className={`block transition-colors ${
+                  theme === 'dark'
+                    ? 'text-gray-400 hover:text-white'
+                    : 'text-gray-600 hover:text-black'
+                }`}
+              >
+                └── @x ─→
+              </a>
             </div>
           </section>
         </main>
