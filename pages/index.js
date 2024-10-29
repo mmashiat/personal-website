@@ -8,6 +8,7 @@ const Home = () => {
   const [walletConnected, setWalletConnected] = useState(false);
   const [newEmoji, setNewEmoji] = useState('');
   const [showConfetti, setShowConfetti] = useState(false);
+  const [location, setLocation] = useState('Loading...');
   const [signatures, setSignatures] = useState([
     { address: "0x1234...5678", emoji: "🌟", position: { top: '25%', right: '5%' } },
     { address: "0xAB12...89CD", emoji: "✨", position: { top: '45%', left: '5%' } },
@@ -17,7 +18,7 @@ const Home = () => {
   const EMOJIS = ["🌟", "🚀", "🎨", "🎭", "🌈", "✨", "🎪", "🎮", "🎯", "🎲", "🔮", "⭐"];
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   };
 
   useEffect(() => {
@@ -37,6 +38,34 @@ const Home = () => {
     updateTimeAndMoon();
     const interval = setInterval(updateTimeAndMoon, 60000);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          try {
+            const response = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10`
+            );
+            const data = await response.json();
+            const city = data.address.city || data.address.town || data.address.village || 'Unknown City';
+            const state = data.address.state || '';
+            setLocation(`${city}, ${state}`);
+          } catch (error) {
+            console.error("Error fetching location data:", error);
+            setLocation("Location unavailable");
+          }
+        },
+        (error) => {
+          console.error("Error getting geolocation:", error);
+          setLocation("Location unavailable");
+        }
+      );
+    } else {
+      setLocation("Geolocation not supported");
+    }
   }, []);
 
   const getSafePosition = () => {
@@ -117,7 +146,7 @@ const Home = () => {
           }`}>
             <div className="flex items-center space-x-2">
               <span>📍</span>
-              <span>New York, NY</span>
+              <span>{location}</span>
             </div>
             
             <div className="flex items-center space-x-2">
@@ -135,7 +164,7 @@ const Home = () => {
             <p className={`leading-relaxed ${
               theme === 'dark' ? 'text-gray-300' : 'text-gray-800'
             }`}>
-              Hi, I'm [Your Name]. I'm a [your role/passion] based in [location]. 
+              Hi, I'm [Your Name]. I'm a [your role/passion] based in {location}. 
               I spend my days crafting digital experiences and exploring new technologies.
               When I'm not coding, you'll find me trying new restaurants and working on 
               side projects.
@@ -157,26 +186,27 @@ const Home = () => {
               "Simplicity is the ultimate sophistication." — Leonardo da Vinci
             </p>
           </section>
- <section className="space-y-2 font-mono text-sm">
-  <p className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}>
-    directory
-  </p>
-  <div className="flex flex-col space-y-2">
-    {['/projects', '/work', '/food', '/photos'].map((path) => (
-      <a 
-        key={path}
-        href={path}
-        className={`block transition-colors ${
-          theme === 'dark'
-            ? 'text-gray-400 hover:text-white'
-            : 'text-gray-600 hover:text-black'
-        }`}
-      >
-        └── {path}
-      </a>
-    ))}
-  </div>
- </section>
+
+          <section className="space-y-2 font-mono text-sm">
+            <p className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}>
+              directory
+            </p>
+            <div className="flex flex-col space-y-2">
+              {['/projects', '/work', '/food', '/photos'].map((path) => (
+                <a 
+                  key={path}
+                  href={path}
+                  className={`block transition-colors ${
+                    theme === 'dark'
+                      ? 'text-gray-400 hover:text-white'
+                      : 'text-gray-600 hover:text-black'
+                  }`}
+                >
+                  └── {path}
+                </a>
+              ))}
+            </div>
+          </section>
 
           <section className="space-y-4 font-mono text-sm">
             <p className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}>
@@ -220,26 +250,26 @@ const Home = () => {
             </div>
           </section>
 
- <section className="space-y-2 font-mono text-sm pt-4">
-  <p className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}>
-    connect
-  </p>
-  <div className="flex flex-col space-y-2">
-    {['linkedin', 'twitter'].map((platform) => (
-      <a 
-        key={platform}
-        href={`https://${platform}.com/yourusername`}
-        className={`block transition-colors ${
-          theme === 'dark'
-            ? 'text-gray-400 hover:text-white'
-            : 'text-gray-600 hover:text-black'
-        }`}
-      >
-        └── @{platform} ─→
-      </a>
-    ))}
-  </div>
-</section>
+          <section className="space-y-2 font-mono text-sm pt-4">
+            <p className={theme === 'dark' ? 'text-gray-500' : 'text-gray-400'}>
+              connect
+            </p>
+            <div className="flex flex-col space-y-2">
+              {['linkedin', 'twitter'].map((platform) => (
+                <a 
+                  key={platform}
+                  href={`https://${platform}.com/yourusername`}
+                  className={`block transition-colors ${
+                    theme === 'dark'
+                      ? 'text-gray-400 hover:text-white'
+                      : 'text-gray-600 hover:text-black'
+                  }`}
+                >
+                  └── @{platform} ─→
+                </a>
+              ))}
+            </div>
+          </section>
         </main>
       </div>
     </div>
