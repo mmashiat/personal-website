@@ -25,9 +25,9 @@ const Home = () => {
     const updateTimeAndMoon = () => {
       const now = new Date();
       setCurrentTime(now.toLocaleTimeString('en-US', { 
-        timeZone: 'America/New_York',
         hour: '2-digit',
-        minute: '2-digit'
+        minute: '2-digit',
+        second: '2-digit'
       }));
 
       const phases = ['🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘'];
@@ -36,7 +36,7 @@ const Home = () => {
     };
 
     updateTimeAndMoon();
-    const interval = setInterval(updateTimeAndMoon, 60000);
+    const interval = setInterval(updateTimeAndMoon, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -151,7 +151,7 @@ const Home = () => {
             
             <div className="flex items-center space-x-2">
               <span>🕐</span>
-              <span>EST • {currentTime}</span>
+              <span>{currentTime}</span>
             </div>
             
             <div className="flex items-center space-x-2">
